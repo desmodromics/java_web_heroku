@@ -26,17 +26,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<<<<<<< HEAD
-=======
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+		
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
->>>>>>> 7121f478ec8f01a75c6c59cd551dd7c1813917f1
     </dependencies>
     
     <build>
@@ -45,7 +44,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<<<<<<< HEAD
 			
 			<plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -68,8 +66,6 @@
                 </execution>
             </executions>
         </plugin>
-=======
->>>>>>> 7121f478ec8f01a75c6c59cd551dd7c1813917f1
         </plugins>
     </build>
         
