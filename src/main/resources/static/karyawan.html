@@ -13,10 +13,16 @@
 
 
     </head>
-    <body>
+    <body ng-app="halo">
+        <div ng-controller="TopbarController">
+            <button class="btn btn-primary" ng-click="logout()">
+                Logout
+            </button>
+        </div>
+
+        
         <h1>Daftar Karyawan</h1>
 
-        <div ng-app="halo">
 
             Nama : <input ng-model="nama">
             <br> Selamat pagi, {{nama}}
@@ -36,7 +42,9 @@
                 <button class="btn btn-primary" ng-click="updateTabelKaryawan()">
                     Refresh Tabel
                 </button>
-                <button class="btn btn-primary">Tambah Data</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Tambah Data
+                </button>
 
 
                 <div ng-hide="daftarKaryawan.totalElements && daftarKaryawan.totalElements > 0">
@@ -59,11 +67,11 @@
                                 <td>{{k.nama}}</td>
                                 <td>{{k.tanggalLahir}}</td>
                                 <td>
-                                    <button class="btn btn-sm">
+                                    <button class="btn btn-sm" data-toggle="modal" data-target="#myModal" ng-click="editKaryawan(k)">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         edit
                                     </button>
-                                    <button class="btn btn-sm">
+                                    <button class="btn btn-sm" ng-click="hapusKaryawan(k)">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         hapus
                                     </button>
@@ -72,9 +80,68 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Edit Karyawan</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <form class="form-horizontal" name="form">
+                                    <div class="form-group">
+                                        <label for="inputNip" class="col-sm-2 control-label">NIP</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputNip" name="inputNip"
+                                                   placeholder="Nomor Induk Pegawai"
+                                                   ng-model="karyawan.nip"
+                                                   required="true">
+                                            <span class="help-block" ng-show="form.inputNip.$error.required">
+                                                NIP harus diisi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="error('inputNama')">
+                                        <label for="inputNama" class="col-sm-2 control-label">Nama</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputNama" name="inputNama"
+                                                   placeholder="Nama Karyawan"
+                                                   ng-model="karyawan.nama"
+                                                   required="true">
+                                            <span class="help-block" ng-show="form.inputNama.$error.required">
+                                                Nama harus diisi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTanggal" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputTanggal" name="inputTanggal"
+                                                   placeholder="yyyy-MM-dd"
+                                                   ng-model="karyawan.tanggalLahir"
+                                                   required="true">
+                                            <span class="help-block" ng-show="form.inputTanggal.$error.required">
+                                                Tanggal lahir harus diisi
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" 
+
+                                        data-dismiss="modal" 
+                                        ng-click="simpanKaryawan()" ng-disabled="form.$invalid">Save changes</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div>
 
-        </div>
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
